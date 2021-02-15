@@ -1,0 +1,81 @@
+.btn-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+
+  button {
+    background-color: white;
+    border: 5px solid blue;
+    border-radius: 8px;
+    color: black;
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    font-size: 2rem;
+    margin-right: 5px;
+  }
+
+  button:hover {
+    background-color: blue;
+    color: white;
+  }
+
+  button:focus {
+    background-color: blue;
+    color: white;
+  }
+
+  button:disabled {
+    background-color: lighten(gray, 30%);
+    border: 5px solid lighten(blue, 30%);
+    color: white;
+  }
+
+  .double-wide-btn {
+    width: 145px;
+  }
+
+  .selected-symbol {
+    background-color: orange;
+  }
+}
+
+.calc-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px;
+}
+
+.calc-screen {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border: 5px solid black;
+  border-radius: 8px;
+  height: 50px;
+  padding: 10px;
+  min-width: 270px;
+
+  p {
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-align: right;
+    margin: 0px;
+  }
+}
+
+.calc-error {
+  color: red;
+  text-align: center;
+}
