@@ -52,7 +52,7 @@ export function initWebSocketConnection(): ThunkAction<
     };
     client.onmessage = (message) => {
       let res: IValues = JSON.parse(message.data as string);
-      res?.answer.toString() &&
+      res?.answer?.toString() &&
         dispatch(updateCurrentNumber(res.answer.toString()));
       dispatch(updateHistory(JSON.parse(res.history)));
     };
