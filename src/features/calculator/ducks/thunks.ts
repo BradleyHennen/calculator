@@ -8,7 +8,7 @@ import {
 import { RootState } from "../../../store";
 
 interface IValues {
-  answer: string;
+  answer: number;
   history: string;
 }
 
@@ -52,7 +52,8 @@ export function initWebSocketConnection(): ThunkAction<
     };
     client.onmessage = (message) => {
       let res: IValues = JSON.parse(message.data as string);
-      res?.answer && dispatch(updateCurrentNumber(res.answer));
+      res?.answer.toString() &&
+        dispatch(updateCurrentNumber(res.answer.toString()));
       dispatch(updateHistory(JSON.parse(res.history)));
     };
     client.onclose = () => {

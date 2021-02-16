@@ -43,7 +43,7 @@ const calculatorSlice = createSlice({
       state.currentNumber = state.currentNumber + action.payload;
     },
     updateCurrentNumber(state, action: PayloadAction<string>) {
-      state.currentNumber = action.payload.toString();
+      state.currentNumber = action.payload;
     },
     updateCurrentSymbol(state, action: PayloadAction<"/" | "+" | "*" | "-">) {
       state.currentSymbol = action.payload;
@@ -74,7 +74,7 @@ const calculatorSlice = createSlice({
         state.error = "CANNOT DIVIDE BY ZERO. ENTER NEW NUMBER";
         state.currentNumber = "";
       } else if (
-        state?.currentValue &&
+        (state?.currentValue || state?.currentValue === 0) &&
         state?.currentSymbol &&
         state?.currentNumber &&
         state.initCalc
