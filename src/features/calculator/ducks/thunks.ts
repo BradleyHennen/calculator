@@ -13,7 +13,7 @@ interface IValues {
 }
 
 const HOST = process?.env?.REACT_APP_API_ENDPOINT
-  ? process.env.REACT_APP_API_ENDPOINT.replace(/^http/, 'ws')
+  ? process.env.REACT_APP_API_ENDPOINT.replace(/^http/, "ws")
   : "ws://localhost:5000";
 const client = new w3cwebsocket(HOST);
 
@@ -54,6 +54,10 @@ export function initWebSocketConnection(): ThunkAction<
       let res: IValues = JSON.parse(message.data as string);
       res?.answer && dispatch(updateCurrentNumber(res.answer));
       dispatch(updateHistory(JSON.parse(res.history)));
+    };
+    client.onclose = () => {
+      console.log("in on close");
+      setTimeout(initWebSocketConnection, 1000);
     };
   };
 }
