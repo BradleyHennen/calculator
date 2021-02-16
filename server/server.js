@@ -1,11 +1,13 @@
 const express = require('express');
-const http = require('http');
 const webSocket = require('ws');
 const { evaluate } = require('mathjs');
 const { Pool } = require('pg');
 
-const app = express();
-const server = http.createServer(app);
+const PORT = process.env.PORT || 5000;
+const INDEX = '/index.html';
+const server = express().use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+  .listen(PORT, () => console.log(`Listening on ${PORT}`));
+
 const webSocketServer = new webSocket.Server({ server });
 
 let configPg = {};
@@ -88,10 +90,6 @@ const getEquations = () => {
   });
 };
 
-const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => {
-  console.log(`Server started on port ${PORT} :)`);
-});
 
 pool.on("error", (err) => {
   console.error("Unexpected error on idle client", err);

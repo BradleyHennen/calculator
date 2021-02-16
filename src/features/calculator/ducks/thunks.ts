@@ -11,7 +11,11 @@ interface IValues {
   answer: string;
   history: string;
 }
-const client = new w3cwebsocket("ws://localhost:5000");
+
+const HOST = process?.env?.REACT_APP_API_ENDPOINT
+  ? process.env.REACT_APP_API_ENDPOINT.replace(/^http/, 'ws')
+  : "ws://localhost:5000";
+const client = new w3cwebsocket(HOST);
 
 export function sendCalculation(): ThunkAction<
   void,
