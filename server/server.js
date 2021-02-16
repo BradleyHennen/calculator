@@ -1,8 +1,8 @@
-import express from "express";
-import http from "http";
-import webSocket from "ws";
-import { evaluate } from "mathjs";
-import { Pool } from "pg";
+const express = require('express');
+const http = require('http');
+const webSocket = require('ws');
+const { evaluate } = require('mathjs');
+const { Pool } = require('pg');
 
 const app = express();
 const server = http.createServer(app);
@@ -30,16 +30,10 @@ if (process.env.DATABASE_URL) {
 
 const pool = new Pool(configPg);
 
-interface IValues {
-  currentValue: number;
-  currentNumber: string;
-  currentSymbol: "/" | "+" | "*" | "-" | null;
-}
-
 webSocketServer.on("connection", (ws) => {
-  ws.on("message", (values: string) => {
-    const variables: IValues = JSON.parse(values);
-    const equation: string = `${variables.currentValue} ${variables.currentSymbol} ${variables.currentNumber}`;
+  ws.on("message", (values) => {
+    const variables = JSON.parse(values);
+    const equation = `${variables.currentValue} ${variables.currentSymbol} ${variables.currentNumber}`;
     let answer = evaluate(equation);
     let fullEquation = `${equation} = ${answer}`;
     createSocketMessage(fullEquation).then((res) => {
@@ -64,7 +58,7 @@ webSocketServer.on("connection", (ws) => {
   });
 });
 
-const createSocketMessage = (equation: string) => {
+const createSocketMessage = (equation) => {
   return new Promise((resolve) => {
     pool.query(
       'INSERT INTO "calculator" (equation) VALUES ($1) RETURNING id',
