@@ -5,7 +5,7 @@ function History(): JSX.Element {
     const { history } = useSelector((state: RootState) => state.calculatorReducer)
 
     return (
-        <div>
+        <div className="history-container">
             <h2>Calculation History</h2>
             <ul>
                 {history.map((res, index): JSX.Element => {

@@ -7,7 +7,7 @@ export default function Routes(): JSX.Element {
   return (
     <Router>
       <Switch>
-        <Route path="/">
+        <Route exact path="/">
           <Calculator />
         </Route>
         <Route path="*">
