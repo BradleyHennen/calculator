@@ -60,5 +60,9 @@ export function initWebSocketConnection(): ThunkAction<
       console.log("in on close");
       setTimeout(initWebSocketConnection, 1000);
     };
+    client.onerror = (err) => {
+      console.error("websocket error: ", err);
+      client.close();
+    };
   };
 }

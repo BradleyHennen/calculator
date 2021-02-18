@@ -28,7 +28,7 @@ const calculatorSlice = createSlice({
   reducers: {
     checkAndUpdateCurrentNumber(state, action: PayloadAction<string>) {
       //Check for leading zeros
-      if (state.currentNumber === "" && action.payload === "0") return;
+      if (state.currentNumber === "0" && action.payload === "0") return;
       //Check for multiple decimals
       if (state.currentNumber.includes(".") && action.payload === ".") return;
 
